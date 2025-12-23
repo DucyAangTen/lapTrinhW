@@ -55,7 +55,7 @@ function UploadPhotoDialog({ open, onClose, onUploadSuccess }) {
       const formData = new FormData();
       formData.append('photo', selectedFile);
 
-      const response = await fetch("http://localhost:8081/photos/new", {
+      const response = await fetch("/photos/new", {
         method: "POST",
         credentials: "include",
         body: formData,

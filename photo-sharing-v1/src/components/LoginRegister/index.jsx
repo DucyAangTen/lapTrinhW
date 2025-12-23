@@ -42,7 +42,7 @@ function LoginRegister() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8081/admin/login", {
+      const response = await fetch("/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ function LoginRegister() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8081/user", {
+      const response = await fetch("/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -136,7 +136,7 @@ function LoginRegister() {
     <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'flex-start', bgcolor: '#f5f5f5', p: 2, pt: 8 }}>
       <Grid container spacing={2} maxWidth="md" sx={{ margin: '0 auto' }}>
         {/* Login Form */}
-        <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6}>
           <Card elevation={2}>
             <CardContent>
               <Typography variant="h6" gutterBottom align="center" sx={{ fontWeight: 500, color: 'primary.main' }}>

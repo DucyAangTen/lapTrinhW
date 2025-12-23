@@ -6,7 +6,7 @@
  */
 function fetchModel(url) {
   return fetch(url, {
-    credentials: 'include', // Gửi cookies/session với mỗi request
+    credentials: "include", // Gửi cookies/session với mỗi request
   })
     .then((response) => {
       if (!response.ok) {
@@ -15,7 +15,7 @@ function fetchModel(url) {
       return response.json();
     })
     .catch((error) => {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
       throw error;
     });
 }

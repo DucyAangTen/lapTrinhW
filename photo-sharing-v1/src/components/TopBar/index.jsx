@@ -59,7 +59,7 @@ function TopBar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:8081/admin/logout", {
+      await fetch("/admin/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -96,7 +96,7 @@ function TopBar() {
                 {getContextInfo()}
               </Typography>
               <Typography variant="body1" color="inherit">
-                Hi {currentUser.first_name}
+              Xin chào, {currentUser.login_name}
               </Typography>
               <Button
                 variant="contained"

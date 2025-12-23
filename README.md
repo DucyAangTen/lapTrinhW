@@ -119,3 +119,4 @@ npm start
 - Đảm bảo backend đang chạy
 - Kiểm tra proxy trong `package.json` của frontend
 - Mở Developer Tools (F12) để xem lỗi trong Console
+"# lapTrinhW" 

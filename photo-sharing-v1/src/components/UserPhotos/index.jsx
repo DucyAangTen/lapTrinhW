@@ -111,7 +111,7 @@ function UserPhotos() {
     setCommentError("");
 
     try {
-      const response = await fetch(`http://localhost:8081/photosOfUser/CommentsOfPhoto/${photoId}`, {
+      const response = await fetch(`/photosOfUser/CommentsOfPhoto/${photoId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
