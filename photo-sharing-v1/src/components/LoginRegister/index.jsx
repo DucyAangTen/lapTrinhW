@@ -7,7 +7,7 @@ import {
   Typography,
   Box,
   Alert,
-  Grid
+  Grid,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -18,7 +18,7 @@ function LoginRegister() {
   // Login state
   const [loginName, setLoginName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  
+
   // Register state
   const [regLoginName, setRegLoginName] = useState("");
   const [regPassword, setRegPassword] = useState("");
@@ -28,7 +28,7 @@ function LoginRegister() {
   const [regLocation, setRegLocation] = useState("");
   const [regDescription, setRegDescription] = useState("");
   const [regOccupation, setRegOccupation] = useState("");
-  
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ function LoginRegister() {
     setError("");
     setSuccess("");
     setLoading(true);
-
+    // thực hiện gửi lên bằng proxy
     try {
       const response = await fetch("/admin/login", {
         method: "POST",
@@ -48,9 +48,9 @@ function LoginRegister() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           login_name: loginName,
-          password: loginPassword 
+          password: loginPassword,
         }),
       });
 
@@ -64,7 +64,7 @@ function LoginRegister() {
 
       // Lưu thông tin user vào context
       login(data);
-      
+
       // Chuyển đến trang user detail
       navigate(`/users/${data._id}`);
     } catch (err) {
@@ -78,13 +78,13 @@ function LoginRegister() {
     e.preventDefault();
     setError("");
     setSuccess("");
-    
+
     // Validate passwords match
     if (regPassword !== regPasswordConfirm) {
       setError("Passwords do not match");
       return;
     }
-    
+
     setLoading(true);
 
     try {
@@ -100,7 +100,7 @@ function LoginRegister() {
           last_name: regLastName,
           location: regLocation,
           description: regDescription,
-          occupation: regOccupation
+          occupation: regOccupation,
         }),
       });
 
@@ -114,7 +114,7 @@ function LoginRegister() {
 
       // Registration successful
       setSuccess("Registration successful! You can now login.");
-      
+
       // Clear form
       setRegLoginName("");
       setRegPassword("");
@@ -133,18 +133,40 @@ function LoginRegister() {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'flex-start', bgcolor: '#f5f5f5', p: 2, pt: 8 }}>
-      <Grid container spacing={2} maxWidth="md" sx={{ margin: '0 auto' }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "flex-start",
+        bgcolor: "#f5f5f5",
+        p: 2,
+        pt: 8,
+      }}
+    >
+      <Grid container spacing={2} maxWidth="md" sx={{ margin: "0 auto" }}>
         {/* Login Form */}
-          <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6}>
           <Card elevation={2}>
             <CardContent>
-              <Typography variant="h6" gutterBottom align="center" sx={{ fontWeight: 500, color: 'primary.main' }}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                align="center"
+                sx={{ fontWeight: 500, color: "primary.main" }}
+              >
                 Login
               </Typography>
 
-              {error && <Alert severity="error" sx={{ mb: 1.5, py: 0.5 }}>{error}</Alert>}
-              {success && <Alert severity="success" sx={{ mb: 1.5, py: 0.5 }}>{success}</Alert>}
+              {error && (
+                <Alert severity="error" sx={{ mb: 1.5, py: 0.5 }}>
+                  {error}
+                </Alert>
+              )}
+              {success && (
+                <Alert severity="success" sx={{ mb: 1.5, py: 0.5 }}>
+                  {success}
+                </Alert>
+              )}
 
               <form onSubmit={handleLogin}>
                 <TextField
@@ -186,38 +208,114 @@ function LoginRegister() {
         <Grid item xs={12} md={6}>
           <Card elevation={2}>
             <CardContent>
-              <Typography variant="h6" gutterBottom align="center" sx={{ fontWeight: 500, color: 'secondary.main' }}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                align="center"
+                sx={{ fontWeight: 500, color: "secondary.main" }}
+              >
                 Register
               </Typography>
 
               <form onSubmit={handleRegister}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
-                    <TextField fullWidth label="Login Name" size="small" value={regLoginName} onChange={(e) => setRegLoginName(e.target.value)} required disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="Login Name"
+                      size="small"
+                      value={regLoginName}
+                      onChange={(e) => setRegLoginName(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField fullWidth label="Password" type="password" size="small" value={regPassword} onChange={(e) => setRegPassword(e.target.value)} required disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="Password"
+                      type="password"
+                      size="small"
+                      value={regPassword}
+                      onChange={(e) => setRegPassword(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField fullWidth label="Confirm" type="password" size="small" value={regPasswordConfirm} onChange={(e) => setRegPasswordConfirm(e.target.value)} required disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="Confirm"
+                      type="password"
+                      size="small"
+                      value={regPasswordConfirm}
+                      onChange={(e) => setRegPasswordConfirm(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField fullWidth label="First Name" size="small" value={regFirstName} onChange={(e) => setRegFirstName(e.target.value)} required disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="First Name"
+                      size="small"
+                      value={regFirstName}
+                      onChange={(e) => setRegFirstName(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField fullWidth label="Last Name" size="small" value={regLastName} onChange={(e) => setRegLastName(e.target.value)} required disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="Last Name"
+                      size="small"
+                      value={regLastName}
+                      onChange={(e) => setRegLastName(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField fullWidth label="Location" size="small" value={regLocation} onChange={(e) => setRegLocation(e.target.value)} disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="Location"
+                      size="small"
+                      value={regLocation}
+                      onChange={(e) => setRegLocation(e.target.value)}
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField fullWidth label="Description" size="small" multiline rows={2} value={regDescription} onChange={(e) => setRegDescription(e.target.value)} disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="Description"
+                      size="small"
+                      multiline
+                      rows={2}
+                      value={regDescription}
+                      onChange={(e) => setRegDescription(e.target.value)}
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField fullWidth label="Occupation" size="small" value={regOccupation} onChange={(e) => setRegOccupation(e.target.value)} disabled={loading} />
+                    <TextField
+                      fullWidth
+                      label="Occupation"
+                      size="small"
+                      value={regOccupation}
+                      onChange={(e) => setRegOccupation(e.target.value)}
+                      disabled={loading}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <Button type="submit" fullWidth variant="contained" color="secondary" disabled={loading}>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      disabled={loading}
+                    >
                       {loading ? "Registering..." : "Register Me"}
                     </Button>
                   </Grid>
